@@ -19,6 +19,7 @@ body {
 .content {
 	text-align: center;
 	display: inline-block;
+	width: 800px;
 }
 
 .title {
@@ -105,4 +106,29 @@ body {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 15px;
+}
+
+.tag {
+	padding-right: 10px; 
+	font-size: 15px;
+}
+
+.tag.largest {
+	font-size: larger;
+}
+
+.tag.large {
+	font-size: large;
+}
+
+.tag.medium {
+	font-size: medium;
+}
+
+.tag.small {
+	font-size: small;
+}
+
+.tag.smallest {
+	font-size: x-small;
 }

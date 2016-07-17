@@ -21,17 +21,10 @@ class FrontEndController extends Controller
     public function generateChart(Request $request)
     {
     	$type = $request->input("type");
-    	$this->getChart($type);
 
-    	return view("ajax.chart", ["type" => $type]);
+    	return view("ajax.chart", ["type" => $type, "chart" => $this->getChart($type)]);
     }
     
-    /*
-        “Anchor Text” grouped by values converted to lowercase (word / tag cloud chart)
-        “Link Status” (pie or donut chart)
-        “From URL” grouped by host (pie or donut chart)
-        “BLdom” grouped by defined classes [0|1 - 10|11 - 100|\< 1,000|\< 10,000|\< 100,000|\> 100,000] (bar chart)
-     */
     private function getChart($type)
     {    	
     	switch ($type) {
@@ -53,7 +46,35 @@ class FrontEndController extends Controller
     
     private function generateAnchorTextChart()
     {
+    	$anchor_texts = Link::raw(function($collection){
+    	    return $collection->aggregate(array(
+    	        [
+    	            '$group' => [
+    	                '_id' => ['$toLower' => '$AnchorText'],
+    	                'count' => [
+    	                    '$sum' => 1
+    	                ]
+    	            ]    	        		
+    	        ],
+    	    	[
+    	         	'$sort' => [
+    	        		'count' => -1
+    	        	]
+    	        ]
+    	    ));
+    	});
     	
+    	$max = $anchor_texts[0]->count;
+	
+	    foreach ($anchor_texts as $i => $at) {
+	    	if ($at->count >= ($max / 5 * 4)) $anchor_texts[$i]->display_class = "largest";
+	    	elseif ($at->count >= ($max / 5 * 3)) $anchor_texts[$i]->display_class = "large";
+	    	elseif ($at->count >= ($max / 5 * 2)) $anchor_texts[$i]->display_class = "medium";
+	    	elseif ($at->count >= ($max / 5 * 1)) $anchor_texts[$i]->display_class = "small";
+	    	else $anchor_texts[$i]->display_class = "smallest";
+	    }
+	
+	    return $anchor_texts;
     }
     
     private function generateBLdomChart()

@@ -50,12 +50,12 @@ class ImportCSVToDB extends Job implements ShouldQueue
     		$link->AnchorText = $row[3];
     		$link->LinkStatus = $row[4];
     		$link->Type = $row[5];
-    		$link->BLdom = $row[6];
-    		$link->DomPop = $row[7];
+    		$link->BLdom = intval(str_replace(',', '', $row[6]));
+    		$link->DomPop = intval(str_replace(',', '', $row[7]));
     		$link->Power = $row[8];
     		$link->Trust = $row[9];
     		$link->PowerTrust = $row[10];
-    		$link->Alexa = $row[11];
+    		$link->Alexa = intval(str_replace(',', '', $row[11]));
     		$link->IP = $row[12];
     		$link->CNTRY = $row[13];
     		$link->save();

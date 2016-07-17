@@ -3,6 +3,7 @@
 ## 1. SETUP
 
   - Clone the code
+  - Run "composer update"
   - Make sure the public/ dir is accesible by the web server
   - Make sure the public/progress dir is writable
   - Make sure the storage/ dir and it's subdirs are writable

@@ -162,7 +162,7 @@ class FrontEndController extends Controller
              ->addNumberColumn('Count');
 
         foreach ($from_url as $fu) {
-            $data->addRow([$fu->IP, $fu->count]);
+            $data->addRow([$fu->_id, $fu->count]);
         }
 
         return \Lava::PieChart("Chart", $data, [

@@ -22,7 +22,10 @@ class FrontEndController extends Controller
     {
     	$type = $request->input("type");
 
-    	return view("ajax.chart", ["type" => $type, "chart" => $this->getChart($type)]);
+    	return view("ajax.chart", [
+    		"type" => $type, 
+    		"chart" => $this->getChart($type)
+    	]);
     }
     
     private function getChart($type)
@@ -67,10 +70,14 @@ class FrontEndController extends Controller
     	$max = $anchor_texts[0]->count;
 	
 	    foreach ($anchor_texts as $i => $at) {
-	    	if ($at->count >= ($max / 5 * 4)) $anchor_texts[$i]->display_class = "largest";
-	    	elseif ($at->count >= ($max / 5 * 3)) $anchor_texts[$i]->display_class = "large";
-	    	elseif ($at->count >= ($max / 5 * 2)) $anchor_texts[$i]->display_class = "medium";
-	    	elseif ($at->count >= ($max / 5 * 1)) $anchor_texts[$i]->display_class = "small";
+	    	if ($at->count >= ($max / 5 * 4)) 
+	    		$anchor_texts[$i]->display_class = "largest";
+	    	elseif ($at->count >= ($max / 5 * 3)) 
+                $anchor_texts[$i]->display_class = "large";
+	    	elseif ($at->count >= ($max / 5 * 2)) 
+                $anchor_texts[$i]->display_class = "medium";
+	    	elseif ($at->count >= ($max / 5 * 1)) 
+                $anchor_texts[$i]->display_class = "small";
 	    	else $anchor_texts[$i]->display_class = "smallest";
 	    }
 	

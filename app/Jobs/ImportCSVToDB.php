@@ -35,7 +35,9 @@ class ImportCSVToDB extends Job implements ShouldQueue
     {
     	$this->writeProgress("Starting...");
 
-    	$reader = Reader::createFromPath(storage_path("app/" . $this->csv_file));
+    	$reader = Reader::createFromPath(
+    		storage_path("app/" . $this->csv_file)
+    	);
     	$total = $reader->each(function ($row) {
             return true;
         });
@@ -69,7 +71,7 @@ class ImportCSVToDB extends Job implements ShouldQueue
     private function writeProgress($message)
     {
         file_put_contents(
-            public_path() . '/progress/progress.json', json_encode($message)
+            public_path() . "/progress/progress.json", json_encode($message)
         );
     }
 }

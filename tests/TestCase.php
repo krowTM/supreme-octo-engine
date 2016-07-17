@@ -1,7 +1,9 @@
 <?php
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
-{
+{		
+	const TEST_CSV_FILE = "test.csv";
+	
     /**
      * The base URL to use while testing the application.
      *
@@ -21,5 +23,5 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
-    }
+    }   
 }

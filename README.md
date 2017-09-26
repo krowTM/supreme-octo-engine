@@ -3,7 +3,7 @@
 ## 1. SETUP
 
   - Clone the code
-  - Run "composer update"
+  - Run `composer install`
   - Make sure the public/ dir is accesible by the web server
   - Make sure the public/progress dir is writable
   - Make sure the storage/ dir and it's subdirs are writable
@@ -22,4 +22,4 @@
   - Open [`http://<server>/<install_location>`](http://<server>/<install_location>) in browser
   - Press the Import button to import the csv into the DB and wait till done
   - Press the Charts button to view the charts
-  - To run tests run "vendor/bin/phpunit" in the install location
+  - To run tests run `vendor/bin/phpunit` in the install location
